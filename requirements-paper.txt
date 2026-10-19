@@ -1,0 +1,16 @@
+# Install the matching PyTorch and MMCV builds first, as described in README.md.
+mmengine==0.10.7
+numpy<2
+scipy
+matplotlib
+packaging
+prettytable
+Pillow
+opencv-python
+tqdm
+ftfy
+regex
+einops
+timm
+PyWavelets
+pytorch-wavelets

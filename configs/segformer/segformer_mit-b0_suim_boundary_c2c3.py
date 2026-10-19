@@ -1,0 +1,29 @@
+_base_ = ['./segformer_mit-b0_suim_boundary.py']
+
+# SMBAS input-level ablation B:
+#   BoundaryHead input = C2 + C3
+#   C3 is resized to C2 resolution before concatenation.
+model = dict(
+    auxiliary_head=dict(
+        in_channels=[64, 160],
+        in_index=[1, 2],
+        loss_decode=dict(loss_weight=1.0)))
+
+# Train from MiT-B0 ImageNet-1K initialization only. Do not fine-tune from the
+# saved SUIM baseline checkpoint inherited by the default boundary config.
+load_from = None
+resume = False
+randomness = dict(seed=0, deterministic=False)
+
+work_dir = './work_dirs/module_a/segformer_b0_suim_boundary_c2c3'
+
+custom_hooks = [
+    dict(
+        type='ArchiveExperimentHook',
+        out_dir='experiments/module_a/segformer_b0_suim_boundary_c2c3',
+        config='configs/segformer/segformer_mit-b0_suim_boundary_c2c3.py',
+        name='SUIM SMBAS C2+C3 Boundary Input Ablation',
+        note=(
+            'BoundaryHead input-level ablation: use C2+C3 instead of '
+            'default C1+C2; train from MiT-B0 ImageNet initialization.'))
+]

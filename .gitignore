@@ -1,0 +1,23 @@
+# Local datasets and generated artifacts
+data/
+checkpoints/
+work_dirs/
+experiments/
+output/
+*.pth
+*.pt
+*.ckpt
+*.log
+*.zip
+__pycache__/
+*.py[cod]
+*.egg-info/
+mmseg/.mim/
+build/
+dist/
+.venv/
+.env
+.env.*
+.idea/
+.vscode/
+.DS_Store
